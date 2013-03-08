@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Acceleration Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for Cordova to load
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
+    }
+
+    // onSuccess: Get a snapshot of the current acceleration
+    function onSuccess(acceleration) {
+    	document.getElementById("accelx").innerHTML = "X: " + acceleration.x;
+    	document.getElementById("accely").innerHTML = "Y: " + acceleration.y;
+    	document.getElementById("accelz").innerHTML = "Z: " + acceleration.z;
+    	setTimeout(navigator.accelerometer.getCurrentAcceleration(onSuccess, onError), 2000);
+    }
+
+    // onError: Failed to get the acceleration
+    //
+    function onError() {
+        alert('onError!');
+    }
+
+    </script>
+  </head>
+  <body>
+    <p>Accelerometer Demo</p>
+    <div id="accelx">X: </div>
+    <div id="accely">Y: </div>
+    <div id="accelz">Z: </div>
+  </body>
+</html>
+

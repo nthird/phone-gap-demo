@@ -1,0 +1,6 @@
+name = PGD Tweaks
+description = Accel tweaks for the phone gap demo project
+core = 7.x
+package = PGD
+files[] =pgd_tweaks.module
+

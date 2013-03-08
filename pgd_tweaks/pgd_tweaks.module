@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * pgd_tweaks.module - PGD Tweaks code.
+ *
+ * @author
+ * Shawn FitzPatrick <sdfitzpa@asu.edu>
+ *
+ * Module provides tweaks for the phone gap demo
+ *
+ */
+
+
+/*********************************************************************
+  DRUPAL HOOKS
+*********************************************************************/
+
+function pgd_tweaks_init() {
+  $user_agent = $_SERVER['HTTP_USER_AGENT'];
+	 
+  if (current_path() == "node/1") {
+		 	
+    if (preg_match("/iPhone|iPad|iPod/i", $user_agent)) {
+      drupal_add_js(drupal_get_path('module', 'pgd_tweaks') . '/js/ios/cordova-1.8.1.js');
+    } else if (preg_match("/Android/i", $user_agent)) {
+      drupal_add_js(drupal_get_path('module', 'pgd_tweaks') . '/js/android/cordova-1.8.1.js');
+    }
+		
+  }
+}
+
+
+function pgd_tweaks_entity_load($entities, $types) {
+
+$doonce = 0;
+
+ foreach ($entities as $entity) {
+ 
+    if (current_path() == "node/1" && $doonce == 0) {
+      $doonce = 1;
+      drupal_add_js(drupal_get_path('module', 'pgd_tweaks') . '/js/accel.js'); 
+    }
+  }
+}
